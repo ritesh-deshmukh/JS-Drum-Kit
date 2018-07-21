@@ -3,64 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>JS Drum Kit</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div class="keys">
-    <div data-key = "65" class="key">
+    
+<div class="keys">    
+    <div data-key = "65" class="key" id="65_id" onclick="playClickAudio(
+    x = document.getElementById('65'),
+    y = document.getElementById('65_id')
+    )">
         <kbd>A</kbd>
         <span class="sound">clap</span>
     </div>
-    <div data-key = "83" class="key">
+    <div data-key = "83" class="key" id="83_id" onclick="playClickAudio(
+    x = document.getElementById('83'),
+    y = document.getElementById('83_id')
+    )">
         <kbd>S</kbd>
         <span class="sound">hihat</span>
     </div>
-    <div data-key = "68" class="key">
+    <div data-key = "68" class="key" id="68_id" onclick="playClickAudio(
+    x = document.getElementById('68'),
+    y = document.getElementById('68_id')
+    )">
         <kbd>D</kbd>
         <span class="sound">kick</span>
     </div>
-    <div data-key = "70" class="key">
+    <div data-key = "70" class="key" id="70_id" onclick="playClickAudio(
+    x = document.getElementById('70'),
+    y = document.getElementById('70_id')
+    )">
         <kbd>F</kbd>
         <span class="sound">openhat</span>
     </div>
-    <div data-key = "71" class="key">
+    <div data-key = "71" class="key" id="71_id" onclick="playClickAudio(
+    x = document.getElementById('71'),
+    y = document.getElementById('71_id')
+    )">
         <kbd>G</kbd>
         <span class="sound">boom</span>
     </div>
-    <div data-key = "72" class="key">
+    <div data-key = "72" class="key" id="72_id" onclick="playClickAudio(
+    x = document.getElementById('72'),
+    y = document.getElementById('72_id')
+    )">
         <kbd>H</kbd>
         <span class="sound">ride</span>
     </div>
-    <div data-key = "74" class="key">
+    <div data-key = "74" class="key" id="74_id" onclick="playClickAudio(
+    x = document.getElementById('74'),
+    y = document.getElementById('74_id')
+    )">
         <kbd>J</kbd>
         <span class="sound">snare</span>
     </div>
-    <div data-key = "75" class="key">
+    <div data-key = "75" class="key" id="75_id" onclick="playClickAudio(
+    x = document.getElementById('75'),
+    y = document.getElementById('75_id')
+    )">
         <kbd>K</kbd>
         <span class="sound">tom</span>
     </div>
-    <div data-key = "76" class="key">
-        <kbd>A</kbd>
+    <div data-key = "76" class="key" id="76_id" onclick="playClickAudio(
+    x = document.getElementById('76'),
+    y = document.getElementById('76_id')
+    )">
+        <kbd>L</kbd>
         <span class="sound">tink</span>
     </div>
+
 </div>
-<audio data-key="65" src=""></audio>
-<audio data-key="83" src=""></audio>
-<audio data-key="68" src=""></audio>
-<audio data-key="70" src=""></audio>
-<audio data-key="71" src=""></audio>
-<audio data-key="72" src=""></audio>
-<audio data-key="74" src=""></audio>
-<audio data-key="75" src=""></audio>
-<audio data-key="76" src=""></audio>
+<div class="foo">
+  <span class="letter" data-letter="J">J</span>
+  <span class="letter" data-letter="S">S</span>
+  <span class="letter">&nbsp</span>
+  <span class="letter" data-letter="D">D</span>
+  <span class="letter" data-letter="R">R</span>
+  <span class="letter" data-letter="U">U</span>
+  <span class="letter" data-letter="M">M</span>
+  <span class="letter">&nbsp</span>
+  <span class="letter" data-letter="K">K</span>
+  <span class="letter" data-letter="I">I</span>
+  <span class="letter" data-letter="T">T</span>
+</div>
+
+    <audio id="65" data-key="65" src="sounds/clap.wav"></audio>
+    <audio id="83" data-key="83" src="sounds/hihat.wav"></audio>
+    <audio id="68" data-key="68" src="sounds/kick.wav"></audio>
+    <audio id="70" data-key="70" src="sounds/openhat.wav"></audio>
+    <audio id="71" data-key="71" src="sounds/boom.wav"></audio>
+    <audio id="72" data-key="72" src="sounds/ride.wav"></audio>
+    <audio id="74" data-key="74" src="sounds/snare.wav"></audio>
+    <audio id="75" data-key="75" src="sounds/tom.wav"></audio>
+    <audio id="76" data-key="76" src="sounds/tink.wav"></audio>
 
 
-<script>
-    window.addEventListener('keydown', function(e) {
-        // console.log(e.keyCode)
-        const audio = document.querySelector('audio[data-key="${e.keycode}"]');
-        console.log(audio);
-        if (!audio) return; // Stop function from running
-    });
+<script>    
+    function playSound(e){     
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if(!audio) return; // stop the function from running at all
+        audio.currentTime = 0
+        audio.play()
+        key.classList.add('playing');
+    }
+
+    function removeTransition(e){
+        if(e.propertyName !== 'transform') return; // skip if it is not a transform
+        this.classList.remove('playing')
+    }
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    window.addEventListener('keydown',playSound);
+
+    function playClickAudio(x){
+        // document.getElementById("id").classList.add('playing');
+        // const key = document.querySelector(".key").className = "playing"
+        // console.log(key)
+        x.currentTime = 0
+        x.play()
+        y.classList.add('playing')
+        // key.classList.add('playing');
+        // x.classList.add('playing');
+
+    }
+
 </script>
 
 </body>

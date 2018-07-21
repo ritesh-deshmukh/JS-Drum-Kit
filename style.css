@@ -9,6 +9,8 @@ body,html {
   font-family: sans-serif;
 }
 
+/*keys style*/
+
 .keys {
   display: flex;
   flex: 1;
@@ -52,7 +54,7 @@ kbd {
 
 
 /*Title Style*/
-div.foo{
+div.title{
   width: 90%;
   margin: 0 auto;
   text-align: center;
@@ -60,14 +62,14 @@ div.foo{
 }
 .letter{
   display: all;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 8em;
   margin: 0.2em;
   position: relative;
-  color: #00B4F1;
+  color: #f00068;
   transform-style: preserve-3d;
   perspective: 400;
-  z-index: 1;
+  z-index: 5;
 }
 .letter:before, .letter:after{
   position:absolute;
@@ -86,7 +88,7 @@ div.foo{
     1px 0px 1px rgba(0,0,0,.8);
   z-index: 3;
   transform:
-    rotateX(0deg)
+    rotateX(10deg)
     rotateY(-15deg)
     rotateZ(0deg);
 }
